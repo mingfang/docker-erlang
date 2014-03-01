@@ -18,16 +18,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openssh-server &&	mkdir /v
 #Utilities
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y vim less net-tools inetutils-ping curl git telnet nmap socat dnsutils netcat tree htop unzip sudo
 
-#Dependency
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y default-jdk 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libwxbase2.8-0
+#Dependencies
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y default-jdk libwxbase2.8-0 libwxgtk2.8-0
 
 #Erlang
-RUN wget http://packages.erlang-solutions.com/site/esl/esl-erlang/FLAVOUR_1_general/esl-erlang_16.b.3-2~ubuntu~precise_amd64.deb 
-
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libwxgtk2.8-0
-
-RUN dpkg -i esl-erlang_16.b.3-2~ubuntu~precise_amd64.deb && \
+RUN wget http://packages.erlang-solutions.com/site/esl/esl-erlang/FLAVOUR_1_general/esl-erlang_16.b.3-2~ubuntu~precise_amd64.deb && \
+    dpkg -i esl-erlang_16.b.3-2~ubuntu~precise_amd64.deb && \
     rm esl-erlang_16.b.3-2~ubuntu~precise_amd64.deb
 
 #Configuration
