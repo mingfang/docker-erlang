@@ -1,1 +1,1 @@
-docker run -rm=true -i -t erlang /bin/bash
+docker run -v `pwd`:/docker -rm=true -i -t erlang /bin/bash

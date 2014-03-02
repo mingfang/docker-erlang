@@ -19,12 +19,19 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openssh-server &&	mkdir /v
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y vim less net-tools inetutils-ping curl git telnet nmap socat dnsutils netcat tree htop unzip sudo
 
 #Dependencies
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y default-jdk libwxbase2.8-0 libwxgtk2.8-0
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y default-jdk build-essential libncurses5-dev openssl libssl-dev fop xsltproc unixodbc-dev
 
 #Erlang
-RUN wget http://packages.erlang-solutions.com/site/esl/esl-erlang/FLAVOUR_1_general/esl-erlang_16.b.3-2~ubuntu~precise_amd64.deb && \
-    dpkg -i esl-erlang_16.b.3-2~ubuntu~precise_amd64.deb && \
-    rm esl-erlang_16.b.3-2~ubuntu~precise_amd64.deb
+RUN wget --no-check-certificate https://packages.erlang-solutions.com/erlang/esl-erlang-src/otp_src_R16B03-1.tar.gz && \
+    tar xvf otp*tar.gz && \
+    rm otp*tar.gz
+RUN cd otp_src* && \
+    ./configure && \
+    make && \
+    make install
+RUN rm -rf otp_src*
+ENV PATH /usr/local/lib/erlang/lib/erl_interface-3.7.15/bin:$PATH
+
 
 #Configuration
 ADD . /docker
