@@ -30,8 +30,7 @@ RUN cd otp_src* && \
     make && \
     make install
 RUN rm -rf otp_src*
-ENV PATH /usr/local/lib/erlang/lib/erl_interface-3.7.15/bin:$PATH
-
+RUN echo 'export PATH=/usr/local/lib/erlang/lib/erl_interface-3.7.15/bin:$PATH' >> /root/.bashrc
 
 #Configuration
 ADD . /docker
